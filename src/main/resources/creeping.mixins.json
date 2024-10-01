@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.corrinedev.creeping.mixin",
+  "package": "com.corrinedev.creeping.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "creeping.refmap.json",
   "mixins": [

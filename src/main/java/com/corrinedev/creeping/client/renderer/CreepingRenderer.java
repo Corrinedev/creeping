@@ -1,5 +1,5 @@
 
-package net.corrinedev.creeping.client.renderer;
+package com.corrinedev.creeping.client.renderer;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
@@ -9,6 +9,7 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.HumanoidModel;
 
 import com.corrinedev.creeping.entity.CreepingEntity;
+import net.minecraft.world.level.block.Blocks;
 
 public class CreepingRenderer extends HumanoidMobRenderer<CreepingEntity, HumanoidModel<CreepingEntity>> {
 	public CreepingRenderer(EntityRendererProvider.Context context) {

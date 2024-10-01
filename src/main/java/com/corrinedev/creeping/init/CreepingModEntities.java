@@ -2,8 +2,9 @@
 /*
  *    MCreator note: This file will be REGENERATED on each build.
  */
-package net.corrinedev.creeping.init;
+package com.corrinedev.creeping.init;
 
+import com.corrinedev.creeping.entity.CreepingEntity;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
