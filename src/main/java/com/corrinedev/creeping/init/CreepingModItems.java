@@ -4,19 +4,15 @@
  */
 package com.corrinedev.creeping.init;
 
-import com.corrinedev.creeping.helmets.CreepingHelmetItem;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.block.Block;
+
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-
-import net.minecraft.world.item.Item;
 
 import com.corrinedev.creeping.CreepingMod;
 
 public class CreepingModItems {
-	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, CreepingMod.MODID);
-	public static final RegistryObject<Item> CREEPING_HELMET_ITEM = REGISTRY.register("creeping_helmet", () -> new CreepingHelmetItem.Helmet());
+	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, CreepingMod.MODID);
 	// Start of user code block custom items
 	// End of user code block custom items
 }
