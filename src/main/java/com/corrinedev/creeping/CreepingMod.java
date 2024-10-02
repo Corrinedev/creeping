@@ -30,7 +30,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
-import static com.corrinedev.creeping.init.CreepingModItems.CREEPING_HELMET_ITEM;
 import static com.corrinedev.creeping.init.CreepingModItems.REGISTRY;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -39,6 +38,7 @@ public class CreepingMod {
 
     // Define mod id in a common place for everything to reference
     public static final String MODID = "creeping";
+
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "creeping" namespace
@@ -71,6 +71,7 @@ public class CreepingMod {
       //  modEventBus.addListener(this::addCreative);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.GENERAL_SPEC, "debug-config.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
