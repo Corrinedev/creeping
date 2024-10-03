@@ -30,7 +30,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
-import static com.corrinedev.creeping.init.CreepingModItems.REGISTRY;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(CreepingMod.MODID)
@@ -58,7 +57,6 @@ public class CreepingMod {
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
-        REGISTRY.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
@@ -71,8 +69,7 @@ public class CreepingMod {
       //  modEventBus.addListener(this::addCreative);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.GENERAL_SPEC, "debug-config.toml");
-    }
+        }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
