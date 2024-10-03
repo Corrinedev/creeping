@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "creeping.refmap.json",
   "mixins": [
+    "playerSkullBlockMixin"
   ],
   "client": [
     "playerSkullSizeMixin"
