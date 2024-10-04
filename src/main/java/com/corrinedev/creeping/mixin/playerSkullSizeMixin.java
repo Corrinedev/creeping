@@ -14,7 +14,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PlayerHeadItem;
 import net.minecraft.world.level.block.AbstractSkullBlock;
+import net.minecraft.world.level.block.PlayerHeadBlock;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.WallSkullBlock;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -45,7 +48,11 @@ public class playerSkullSizeMixin {
         }
         Minecraft minecraft = Minecraft.getInstance();
         try {
-            pPoseStack.scale(-minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getFloat("Size"), -minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getFloat("Size"), minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getFloat("Size"));
+            if(minecraft.player.getItemBySlot(EquipmentSlot.HEAD).is(Items.PLAYER_HEAD)) {
+                pPoseStack.scale(-minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getFloat("Size"), -minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getFloat("Size"), minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getFloat("Size"));
+            } else {
+                pPoseStack.scale(- 1.0f, -1.0f, 1.0f);
+            }
         } catch(Exception e) {
             pPoseStack.scale(- 1.0f, -1.0f, 1.0f);
         }

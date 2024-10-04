@@ -2,7 +2,14 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"idle": {
-			"loop": true
+			"loop": true,
+			"bones": {
+				"armorHead": {
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

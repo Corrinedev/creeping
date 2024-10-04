@@ -1,21 +1,31 @@
 
 package com.corrinedev.creeping.entity;
 
-import net.minecraft.client.resources.sounds.Sound;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
 
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -27,10 +37,10 @@ import net.minecraft.network.protocol.Packet;
 
 import com.corrinedev.creeping.init.CreepingModEntities;
 
-import java.nio.file.Path;
-import java.util.Optional;
+import javax.annotation.Nullable;
+import java.util.EnumSet;
 
-public class CreepingEntity extends EnderMan {
+public class CreepingEntity extends Monster {
 
 	public CreepingEntity(PlayMessages.SpawnEntity packet, Level world) {
 		this(CreepingModEntities.CREEPING.get(), world);
@@ -58,6 +68,7 @@ public class CreepingEntity extends EnderMan {
 				return this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth();
 			}
 		});
+		this.goalSelector.addGoal(6, new EndermanFreezeWhenLookedAt(this));
 		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1));
         this.goalSelector.addGoal(5, new AvoidEntityGoal(this, Player.class, 8, 2, 2));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this,Player.class, 32));
@@ -106,7 +117,45 @@ public class CreepingEntity extends EnderMan {
 		return builder;
 	}
 	@Override
-	protected boolean teleport() {
-		return false;
+	protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
+		super.populateDefaultEquipmentSlots(pRandom, pDifficulty);
+		this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.PLAYER_HEAD));
 	}
+	static class EndermanFreezeWhenLookedAt extends Goal {
+		private final CreepingEntity enderman;
+		@Nullable
+		private LivingEntity target;
+
+		public EndermanFreezeWhenLookedAt(CreepingEntity pEnderman) {
+			this.enderman = pEnderman;
+			this.setFlags(EnumSet.of(Flag.JUMP, Flag.MOVE));
+		}
+
+		public boolean canUse() {
+			this.target = this.enderman.getTarget();
+			if (!(this.target instanceof Player)) {
+				return false;
+			} else {
+				double d0 = this.target.distanceToSqr(this.enderman);
+				return d0 > 256.0 ? false : this.enderman.isLookingAtMe((Player)this.target);
+			}
+		}
+
+		public void start() {
+			this.enderman.getNavigation().stop();
+		}
+
+		public void tick() {
+			this.enderman.getLookControl().setLookAt(this.target.getX(), this.target.getEyeY(), this.target.getZ());
+		}
+	}
+	boolean isLookingAtMe(Player pPlayer) {
+			Vec3 vec3 = pPlayer.getViewVector(1.0F).normalize();
+			Vec3 vec31 = new Vec3(this.getX() - pPlayer.getX(), this.getEyeY() - pPlayer.getEyeY(), this.getZ() - pPlayer.getZ());
+			double d0 = vec31.length();
+			vec31 = vec31.normalize();
+			double d1 = vec3.dot(vec31);
+			return d1 > 1.0 - 0.025 / d0 ? pPlayer.hasLineOfSight(this) : false;
+		}
+
 }

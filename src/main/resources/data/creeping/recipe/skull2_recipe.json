@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "<creeping:creeping_skull_helmet"
+    },
+    {
+      "item": "creeping:creeping_skull_helmet"
+    }
+  ],
+  "result": {
+    "id": "<item ID>",
+    "count": 5
+  }
+}
