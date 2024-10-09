@@ -1,8 +1,4 @@
 {
   "entity.creeping.creeping": "Creeping",
-  "item.creeping.creeping_skull_leggings": "Creeping Skull Leggings",
-  "item.creeping.creeping_skull_chestplate": "Creeping Skull Chestplate",
-  "item.creeping.creeping_spawn_egg": "Creeping Spawn Egg",
-  "item.creeping.creeping_skull_helmet": "Creeping Skull",
-  "item.creeping.creeping_skull_boots": "Creeping Skull Boots"
+  "item.creeping.creeping_skull": "Creeping Skull"
 }

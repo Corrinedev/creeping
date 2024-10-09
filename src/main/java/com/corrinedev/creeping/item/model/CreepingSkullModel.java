@@ -3,11 +3,6 @@ package com.corrinedev.creeping.item.model;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.layers.SpiderEyesLayer;
-import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.client.resources.SkinManager;
-import net.minecraft.core.UUIDUtil;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.SkullBlock;
@@ -30,8 +25,8 @@ public class CreepingSkullModel extends GeoModel<CreepingSkullItem> {
 	@Override
 	public ResourceLocation getModelResource(CreepingSkullItem object) {
 		Minecraft minecraft = Minecraft.getInstance();
+		//This sets the geo model to the nbt value of "Size"
         return switch (minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getInt("Size")) {
-            case 1 -> new ResourceLocation("creeping", "geo/creepingskull.geo.json");
             case 2 -> new ResourceLocation("creeping", "geo/creepingskull2.geo.json");
             case 3 -> new ResourceLocation("creeping", "geo/creepingskull3.geo.json");
             case 4 -> new ResourceLocation("creeping", "geo/creepingskull4.geo.json");

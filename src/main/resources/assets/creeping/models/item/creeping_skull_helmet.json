@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "creeping:item/minecraft:empty_armor_slot_helmet"
-  }
-}

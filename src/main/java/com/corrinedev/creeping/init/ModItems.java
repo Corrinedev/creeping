@@ -13,8 +13,10 @@ import net.minecraft.world.item.ArmorItem;
 
 
 public class ModItems {
+	// Start of custom items
+
 	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, CreepingMod.MODID);
 	public static final RegistryObject<CreepingSkullItem> CREEPING_SKULL_HELMET = REGISTRY.register("creeping_skull", () -> new CreepingSkullItem(ArmorItem.Type.HELMET, new Item.Properties()));
-	// Start of user code block custom items
-	// End of user code block custom items
+
+	// End of custom items
 }
