@@ -4,6 +4,7 @@
  */
 package com.corrinedev.creeping.init;
 
+import com.corrinedev.creeping.client.renderer.SkulkGoblinRenderer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,5 +16,6 @@ public class CreepingModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(CreepingModEntities.CREEPING.get(), CreepingRenderer::new);
+		event.registerEntityRenderer(CreepingModEntities.SKULK_GOBLIN.get(), SkulkGoblinRenderer::new);
 	}
 }
