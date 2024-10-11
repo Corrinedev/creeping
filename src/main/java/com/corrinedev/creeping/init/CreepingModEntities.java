@@ -4,7 +4,6 @@
  */
 package com.corrinedev.creeping.init;
 
-import com.corrinedev.creeping.entity.CreepingEntity;
 import com.corrinedev.creeping.entity.SkulkGoblinEntity;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,10 +22,7 @@ import com.corrinedev.creeping.CreepingMod;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CreepingModEntities {
 	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, CreepingMod.MODID);
-	public static final RegistryObject<EntityType<CreepingEntity>> CREEPING = register("creeping",
-			EntityType.Builder.<CreepingEntity>of(CreepingEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CreepingEntity::new)
 
-					.sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<SkulkGoblinEntity>> SKULK_GOBLIN = register("skulk_goblin",
 			EntityType.Builder.<SkulkGoblinEntity>of(SkulkGoblinEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(SkulkGoblinEntity::new)
 
@@ -38,7 +34,6 @@ public class CreepingModEntities {
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			CreepingEntity.init();
 			SkulkGoblinEntity.init();
 
 		});
@@ -46,7 +41,6 @@ public class CreepingModEntities {
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
-		event.put(CREEPING.get(), CreepingEntity.createAttributes().build());
 		event.put(SKULK_GOBLIN.get(), SkulkGoblinEntity.createAttributes().build());
 
 	}
