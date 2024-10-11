@@ -16,6 +16,7 @@ public class CreepingSkullArmorRenderer extends GeoArmorRenderer<CreepingSkullIt
 	public CreepingSkullArmorRenderer() {
 		super(new CreepingSkullModel());
 		Minecraft minecraft = Minecraft.getInstance();
+		//This code is fucking useless, delete it at some point and replace it with a regular GeoBone this.head
 		try {
 				this.head = new GeoBone(null, "armorHead", false, minecraft.player.getItemBySlot(EquipmentSlot.HEAD).getTag().getDouble("Size"), false, false);
 		} catch(Exception e) {
